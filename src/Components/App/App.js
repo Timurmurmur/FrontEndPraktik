@@ -54,6 +54,7 @@ export const App =() => {
       <Fragment forRoute="/">
         <>
           <h1>Hello world</h1>
+          <h2>Vlad</h2>
         </>
       </Fragment>
     </Provider>
