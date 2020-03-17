@@ -24,6 +24,8 @@ import { middleware,routesMiddleware, reducer as router, enhancer } from './rout
 import createBrowserHistory from "history/createBrowserHistory";
 import { Provider } from 'react-redux';
 
+import Navbar from '../../Components/Navbar';
+
 const createMiddleware = (
   epicMiddleware
 ) => applyMiddleware(middleware, epicMiddleware, routesMiddleware);
@@ -53,6 +55,7 @@ export const App =() => {
     <Provider store={store}>
       <Fragment forRoute="/">
         <>
+          <Navbar />
           <h1>Hello world</h1>
         </>
       </Fragment>
