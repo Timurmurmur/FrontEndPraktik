@@ -1,6 +1,6 @@
 import React from 'react';
 
-const img = require('../../img/Frame.png');
+const img = require('../../assets/Frame.png');
 
 export const Navbar = () => {
     return (

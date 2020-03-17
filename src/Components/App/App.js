@@ -24,7 +24,7 @@ import { middleware,routesMiddleware, reducer as router, enhancer } from './rout
 import createBrowserHistory from "history/createBrowserHistory";
 import { Provider } from 'react-redux';
 
-import Navbar from '../../Components/Navbar';
+import Navbar from '../Navbar/Navbar';
 
 const createMiddleware = (
   epicMiddleware
