@@ -1,0 +1,7 @@
+.navBarWrapper {
+    display: flex;
+    flex-direction: column;
+}
+.navBarItems {
+    flex-direction: row;
+}
