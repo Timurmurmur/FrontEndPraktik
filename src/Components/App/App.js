@@ -25,6 +25,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 import { Provider } from 'react-redux';
 
 import Navbar from '../Navbar/Navbar';
+import { Main } from '../Main/Main';
 
 const createMiddleware = (
   epicMiddleware
@@ -54,11 +55,10 @@ export const App =() => {
   return (
     <Provider store={store}>
       <Fragment forRoute="/">
-        <>
+        <div className="container">
           <Navbar />
-          <h1>Hello world</h1>
-          <h2>Vlad</h2>
-        </>
+          <Main />
+        </div>
       </Fragment>
     </Provider>
   );

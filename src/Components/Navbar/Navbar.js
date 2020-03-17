@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navbar.css';
-import { HomeFilled, UserOutlined, ImportOutlined } from '@ant-design/icons';
+import { HomeFilled, UserOutlined, LogoutOutlined } from '@ant-design/icons';
 
 const img = require('../../assets/Frame.png');
 
@@ -13,7 +13,7 @@ export const Navbar = () => {
             <div className="navBarItems">
                 <HomeFilled />
                 <UserOutlined />
-                <ImportOutlined />
+                <LogoutOutlined />
             </div>
         </div>
     );
