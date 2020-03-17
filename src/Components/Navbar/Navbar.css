@@ -1,9 +1,13 @@
 .navBarWrapper {
     display: flex;
     flex-direction: column;
+    min-width: 100px;
 }
 .navBarItems {
     display: flex;
     flex-direction: column;
     align-items: start;
+}
+.navBarItems span {
+    font-size: 50px;
 }
