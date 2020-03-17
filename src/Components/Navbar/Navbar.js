@@ -11,8 +11,10 @@ export const Navbar = () => {
                 <img src={img} />
             </span>
             <div className="navBarItems">
+            <div className="navBarItemsMenu">
                 <HomeFilled />
                 <UserOutlined />
+            </div>
                 <LogoutOutlined />
             </div>
         </div>
