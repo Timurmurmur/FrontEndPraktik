@@ -13,8 +13,8 @@ export const SettingMenu = () => {
 
             {/* User */}
             <Button type="default" className="user">
-            <p className="userName">Тимур Бартеньев</p>
-            <img className="userAvatar" src="https://sun9-61.userapi.com/c851132/v851132772/15e8db/T2K3w32aoq0.jpg?ava=1" />
+              <span className="userName">Тимур Бартенев</span>
+              <img className="userAvatar" src="https://anctravel.com.ua/wp-content/uploads/2015/12/avada-team2-174543104.jpg" />
             </Button>
         </div>
       </div>

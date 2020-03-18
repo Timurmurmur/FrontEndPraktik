@@ -1,48 +1,61 @@
+.mainContainer {
+    padding: 30px 50px;
+
+}
+
+.articleWrapper .articleMenu {
+    margin: 20px 0;
+}
+
 .articleMenu {
     display: flex;
-    margin-top: 33px;
+    justify-content: space-between;
 }
+
 .articleID {
-    margin-left: 40px;
     font-size: 25px;
 }
-.articleToolTip {
-    position: fixed;
-    right: 0;
-    margin-right: 40px;
-}
+
+.articleToolTip {}
+
 .iconEdit {
     margin-right: 10px;
 }
- /* Article Info */
-.article {
-    padding-top: 20px;
-    width: 95%;
-    height: 75vh;
-    margin-top: 20px;
-    margin-left: 40px;
-    background: #fff;
-    border-radius: 50px;
+
+/* Article Info */
+.articleWrapper .article {
+    padding: 40px;
 }
- .articleInfo {
-     display: flex;
- }
- .articleTitle {
-     margin-left: 40px;
-     background: inherit;
-     border: none;
-     outline: none;
-     width: 550px;
- }
- .articleDate {
-     position: fixed;
-     right: 0;
-     margin-right: 50px;
- }
-  /* Article Content  */
-  .articleContent {
-      width: 95%;
-      margin-top: 10px;
-      margin-left: 40px;
-      border: none;
-  }
+
+.article {
+    height: 75vh;
+    background: #fff;
+    border-radius: 20px;
+}
+
+
+.articleInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.articleTitle {
+    background: inherit;
+    border: none;
+    outline: none;
+    width: 550px;
+}
+
+.articleDate {}
+
+/* Article Content  */
+
+.article .articleContent {
+    margin-top: 20px;
+    height: 100%;
+}
+
+.articleContent {
+    width: 100%;
+    border: none;
+}
