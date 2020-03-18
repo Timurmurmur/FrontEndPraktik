@@ -1,12 +1,19 @@
 .article {
-    overflow: scroll;
+}
+.userContent{
+    padding: 40px;
 }
 .articleMenu {
     margin: 20px 0;
 }
 .userContentInfo {
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    padding: 40px 300px 0 60px;
+    
+}
+.userContentItemWrapper{
+    width: 100%;
+    border-spacing: 10px 20px;
+    border-collapse: separate;
+}
+.userContentItemInfo{
+    margin-bottom: 20px;
 }

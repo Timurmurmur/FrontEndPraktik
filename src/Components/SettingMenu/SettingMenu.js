@@ -14,7 +14,7 @@ export const SettingMenu = () => {
             {/* User */}
             <Button type="default" className="user">
               <span className="userName">Тимур Бартенев</span>
-              <img className="userAvatar" src="https://anctravel.com.ua/wp-content/uploads/2015/12/avada-team2-174543104.jpg" />
+              <img className="userAvatar" src="https://anctravel.com.ua/wp-content/uploads/2015/12/avada-team2-174543104.jpg" alt="userPhoto"/>
             </Button>
         </div>
       </div>
