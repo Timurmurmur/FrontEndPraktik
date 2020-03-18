@@ -1,0 +1,48 @@
+.articleMenu {
+    display: flex;
+    margin-top: 33px;
+}
+.articleID {
+    margin-left: 40px;
+    font-size: 25px;
+}
+.articleToolTip {
+    position: fixed;
+    right: 0;
+    margin-right: 40px;
+}
+.iconEdit {
+    margin-right: 10px;
+}
+ /* Article Info */
+.article {
+    padding-top: 20px;
+    width: 95%;
+    height: 75vh;
+    margin-top: 20px;
+    margin-left: 40px;
+    background: #fff;
+    border-radius: 50px;
+}
+ .articleInfo {
+     display: flex;
+ }
+ .articleTitle {
+     margin-left: 40px;
+     background: inherit;
+     border: none;
+     outline: none;
+     width: 550px;
+ }
+ .articleDate {
+     position: fixed;
+     right: 0;
+     margin-right: 50px;
+ }
+  /* Article Content  */
+  .articleContent {
+      width: 95%;
+      margin-top: 10px;
+      margin-left: 40px;
+      border: none;
+  }

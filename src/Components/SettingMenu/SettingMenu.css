@@ -1,0 +1,32 @@
+.settingMenu {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+.settings {
+    width: 50px;
+    height: 50px;
+    margin-left: 40px;
+    font-size: 25px;
+}
+/* User */
+.user {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    margin-right: 40px;
+    right: 0;
+    width: 210px auto;
+    height: 64px;
+    border-radius: 20px;
+}
+.userName {
+    margin: 0;
+    font-size: 16px;
+    margin-right: 10px;
+}
+.userAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
