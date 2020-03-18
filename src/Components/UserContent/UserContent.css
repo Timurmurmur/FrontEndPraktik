@@ -1,0 +1,12 @@
+.article {
+    overflow: scroll;
+}
+.articleMenu {
+    margin: 20px 0;
+}
+.userContentInfo {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 300px 0 60px;
+}

@@ -15,9 +15,6 @@
 .articleID {
     font-size: 25px;
 }
-
-.articleToolTip {}
-
 .iconEdit {
     margin-right: 10px;
 }
@@ -45,9 +42,6 @@
     outline: none;
     width: 550px;
 }
-
-.articleDate {}
-
 /* Article Content  */
 
 .article .articleContent {
