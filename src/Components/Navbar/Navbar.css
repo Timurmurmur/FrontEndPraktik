@@ -31,24 +31,26 @@
 }
 
 /* Icons */
-.anticon {
+.navBarItems .anticon {
     padding: 3px;
     border-radius: 5px;
     transition: .3s;
     cursor: pointer;
 }
 
-.anticon:hover {
+.navBarItems .anticon:hover {
     color: #fff;
     background: #76839F;
 }
 
-.anticon-home {
+.navBarItems .anticon-home {
     margin-bottom: 30px;
 }
+.navBarItems a{
+    color: #76839F;
+}
 
-.anticon-logout {
+.navBarItems a .anticon-logout{
     position: absolute;
-    bottom: 0;
-    margin-bottom: 57.4px;
+    bottom: 50px;
 }

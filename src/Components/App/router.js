@@ -19,6 +19,15 @@ const routes = {
   },
   '/auth': {
     title: 'Авторизация'
+  },
+  '/reg': {
+    title: 'Регистрация'
+  },
+  '/profile': {
+    title: 'Профиль'
+  },
+  '/current/:id': {
+    title: 'Статья '
   }
 };
 

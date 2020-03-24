@@ -1,7 +1,7 @@
 .article {
 }
 .userContent{
-    padding: 40px;
+    padding: 20px 40px;
 }
 .articleMenu {
     margin: 20px 0;
@@ -15,5 +15,4 @@
     border-collapse: separate;
 }
 .userContentItemInfo{
-    margin-bottom: 20px;
 }

@@ -3,9 +3,13 @@
 .userContentItem {
     box-shadow: 4px 4px 18px rgba(0, 0, 0, 0.161);
     border-radius: 15px;
+    cursor: pointer;
+    
 }
 
-.userContentItemButton {
+.userContentItemButton span{
+    width: 16px;
+    height: 16px;
 }
 .userContentItemCheck{
     color: #82C91E;

@@ -7,7 +7,7 @@ export const SettingMenu = () => {
   return (
       <div className="settingMenuWrapper">
         <div className="settingMenu">
-            <Tooltip title="settings" className="settings">
+            <Tooltip title="Settings" className="settings">
                 <Button type='default' shape='circle' icon={<SettingOutlined />} />
             </Tooltip>
 

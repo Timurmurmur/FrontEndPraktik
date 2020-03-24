@@ -37,15 +37,17 @@
 
 .articleTitle {
     background: inherit;
-    border: none;
+    border: 1px solid #188fff63;
     outline: none;
     width: 550px;
+    box-sizing: border-box;
 }
 /* Article Content  */
 
 .article .articleContent {
     margin-top: 20px;
     height: 100%;
+    border: 1px solid #188fff63;
 }
 
 .articleContent {
