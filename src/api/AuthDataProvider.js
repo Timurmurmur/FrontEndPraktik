@@ -16,7 +16,8 @@ export class AuthDataProvider extends BaseRestDataProvider {
     )
     .then(res =>
       {
-        localStorage.setItem("X_CSRF_TOKEN", res.headers["x-csrf-token"])
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
         return res
       }
     )

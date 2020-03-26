@@ -1,13 +1,15 @@
 
 import React, { useCallback, useState, useEffect } from "react";
 import "./Reg.css";
-import { Form, Tooltip, Input, Checkbox, Button } from "antd";
+import { Form, Tooltip, Input, Checkbox, Button,Spin, notification } from "antd";
 import axios from 'axios';
 import { Link } from 'redux-little-router';
+import { LoadingOutlined } from '@ant-design/icons'
+import { Loader } from "../Loader/Loader";
 
 export const Reg = (props) => {
     console.log(props);
-    const {reg, pageStatus} = props;
+    const {reg, pageStatus, error} = props;
     const [email, setEmail] = useState("");
     const [emailValidate, setEmailValidate] = useState(false);
   
@@ -72,6 +74,7 @@ export const Reg = (props) => {
   
     const regCallback = () => {
       if(emailValidate, passwordValidate, confirmPasswordValidate){
+        console.log(login,password,nickname,email);
         reg(login,password,nickname,email);
       }
     };
@@ -83,9 +86,17 @@ export const Reg = (props) => {
     const handlePasswordValidate = (value) => {
       return /^(?=.*[a-z])(?=.*[A-Z]).{8,16}$/.test(value);
     }
-  
+    const openNotificationWithIcon = () => {
+      notification['error']({
+        message: 'Ошибка регистрации',
+        description:
+          error,
+      });
+    };
     return (
       <div className="container container_comp_reg">
+        {pageStatus === "ERROR" ? openNotificationWithIcon(): ""}
+        {pageStatus === "LOADING" ? <Loader /> : 
           <Form className="login-form">
             <h1>Регистрация</h1>
             <Form.Item>
@@ -139,8 +150,8 @@ export const Reg = (props) => {
               </Button>
               Already have account ? <Link href={{ pathname: '/auth'}}>Login now!</Link>
             </Form.Item>
-          </Form>
-        </div>
+          </Form>}  
+      </div>
     );
   };
   

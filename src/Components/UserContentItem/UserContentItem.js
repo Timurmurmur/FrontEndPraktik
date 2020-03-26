@@ -8,8 +8,8 @@ import { useDispatch } from 'react-redux';
 export const UserContentItem = ({items, admin}) => {
     const dispatch = useDispatch();
 
-    const goToCurrentArticle = (id) => {
-        dispatch({ type:"ROUTER_PUSH", payload: {pathname: `/current/${id}`, query: {admin: admin }}})
+    const goToCurrentArticle = (id, post) => {
+        dispatch({ type:"ROUTER_PUSH", payload: {pathname: `/article/${id}`}})
     }
 
     return ( 
@@ -22,12 +22,12 @@ export const UserContentItem = ({items, admin}) => {
         </tr>
         {
             items.map((item, index) => (
-                    <tr className="userContentItem" onClick={(e) => goToCurrentArticle(item.id)} key={index}>
+                    <tr className="userContentItem" onClick={(e) => goToCurrentArticle(item.id, item)} key={index}>
                         {/* <Link href={{pathname: `/current/${item.id}`}} key={index}> */}
                         <td className="userContentItemInfo">{item.title}</td>
-                        <td className="userContentItemInfo">{item.category}</td>
-                        <td className="userContentItemInfo">{item.date}</td>
-                        <td className="userContentItemInfo">{item.views}</td>
+                        <td className="userContentItemInfo">{'IT'}</td>
+                        <td className="userContentItemInfo">{item.createdAt.split('T')[0]}</td>
+                        <td className="userContentItemInfo">{'100'}</td>
                         {admin ? 
                             <>
                                 <td><Tooltip title={"Опубликовано"}><CheckOutlined className="userContentItemCheck" /></Tooltip></td>

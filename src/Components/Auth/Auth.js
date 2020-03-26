@@ -4,25 +4,23 @@ import { Form, Tooltip, Input, Checkbox, Button, Alert, notification, Spin } fro
 import { LoadingOutlined } from '@ant-design/icons'
 import axios from 'axios';
 import { Link } from 'redux-little-router';
+import { Loader } from "../Loader/Loader";
 
 export const Auth = (props) => {
   console.log(props);
   const { login, pageStatus, error } = props;
-  const [email, setEmail] = useState("");
-  const [emailValidate, setEmailValidate] = useState(false);
+  const [Login, setLogin] = useState("");
 
   const [password, setPassword] = useState("");
   const [passwordValidate, setPasswordValidate] = useState(false);
 
-  const handleEmailChangeCallback = useCallback(
+  const handleLoginChangeCallback = useCallback(
     (e) => {
       if (e.target) {
-        setEmail(e.target.value);
-        setEmailValidate(handleEmailValidate(e.target.value));
-        console.log(emailValidate)
+        setLogin(e.target.value);
       }
     },
-    [email]
+    [Login]
   );
 
   const handlePasswordChangeCallback = useCallback(
@@ -30,15 +28,14 @@ export const Auth = (props) => {
       if (e.target) {
         setPassword(e.target.value);
         setPasswordValidate(handlePasswordValidate(e.target.value));
-        console.log(emailValidate)
       }
     },
     [password]
   );
 
   const loginCallback = () => {
-    if(emailValidate && passwordValidate){
-      login(email, password);
+    if(passwordValidate){
+      login(Login, password);
     }
   };
 
@@ -60,15 +57,14 @@ export const Auth = (props) => {
   
   return (
     <div className="container container_comp_auth">
-        {pageStatus === "LOADING" ? <div><Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/></div> : 
+        {pageStatus === "LOADING" ? <Loader /> : 
         <Form className="login-form">
           <h1>Авторизация</h1>
           <Form.Item>
               {pageStatus === "ERROR" ? openNotificationWithIcon() : ''}
               <Input
-                placeholder="E-Mail"
-                onChange={handleEmailChangeCallback}
-                style={{borderColor: `${emailValidate == true ? 'green': 'red'}`}}
+                placeholder="Login"
+                onChange={handleLoginChangeCallback}
               />
           </Form.Item>
           <Form.Item>

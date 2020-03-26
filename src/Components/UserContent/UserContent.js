@@ -3,108 +3,29 @@ import './UserContent.css';
 
 import {SettingMenu} from '../SettingMenu/SettingMenu';
 import {UserContentItem} from '../UserContentItem/UserContentItem';
+import { Button } from 'antd';
+import { Link } from 'redux-little-router';
 
-export const UserContent = ({ items }) => {
+export const UserContent = ({ items, admin }) => {
     return (
         <div className="userContentWrapper">
             <SettingMenu/>
             <div className="articleMenu">
                 <span className="articleID">Ваши статьи</span>
             </div>
-                <div className="article">
-                    
-                    <div className="userContent">
-                        <UserContentItem
-                            admin={true}
-                            items={[
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id1'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id2',
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id3'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id4'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id5'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id6'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id7'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id8'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id9'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id10'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id11'
-                                },
-                                {
-                                    title: 'Web - Разработка',
-                                    category: 'IT',
-                                    date: '21.03.2020',
-                                    views: '1200',
-                                    id: 'id12'
-                                },
-                            ]}
-                        ></UserContentItem>
-                    </div>
+            <div className="article">
+                <div className="userContent">
+                    {items.length === 0 ? 
+                    <div style={{width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                        <span style={{fontSize: 20}}>У вас пока нет статей</span>
+                        <Link href={{pathname: '/article/new'}}><Button type="primary" style={{marginTop: 30}}>Добавить статью</Button></Link>
+                    </div> :
+                    <UserContentItem
+                    admin={admin}
+                    items={items}
+                ></UserContentItem>}
                 </div>
+            </div>
         </div>
     );
 }

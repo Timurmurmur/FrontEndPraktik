@@ -1,116 +1,47 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Main.css';
 import {SettingMenu} from '../SettingMenu/SettingMenu';
 import {UserContentItem} from '../UserContentItem/UserContentItem';
-
+import {Spin} from 'antd';
 import { Article } from '../Article/Article';
 import { UserContent } from '../UserContent/UserContent';
 import { Search } from '../Search/Search';
+import { Loader } from '../Loader/Loader';
+import { PageStatus } from '../../common/typings';
 
-export const Main = () => {
-  return(
-    <div className="mainContainer">
-      <div className="userContentWrapper">
-          <div className="articleMenu" style={{alignItems: 'center'}}>
-            <div>
-              <Search />
+export class Main extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {}
+    }
+
+    componentDidMount() {
+        this.props.loadPosts();
+        console.log(this.props);
+    }
+
+    render() {
+        return(
+            <div className="mainContainer">
+                {this.props.pageStatus === PageStatus.LOADING ? <Loader /> :
+                <div className="userContentWrapper">
+                <div className="articleMenu" style={{alignItems: 'center'}}>
+                    <div>
+                    <Search />
+                    </div>
+                    <span className="articleID">Список статей</span>
+                </div>
+                <div className="article">
+                    <div className="userContent">
+                        <UserContentItem
+                            admin={false}
+                            items={this.props.posts}
+                        ></UserContentItem>
+                    </div>
+                </div>
+                </div>}
             </div>
-            <span className="articleID">Список статей</span>
-          </div>
-          <div className="article">
-              <div className="userContent">
-                  <UserContentItem
-                    admin={false}
-                    items={[
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id1'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id2',
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id3'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id4'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id5'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id6'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id7'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id8'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id9'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id10'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id11'
-                        },
-                        {
-                            title: 'Web - Разработка',
-                            category: 'IT',
-                            date: '21.03.2020',
-                            views: '1200',
-                            id: 'id12'
-                        },
-                    ]}
-                  ></UserContentItem>
-              </div>
-          </div>
-        </div>
-    </div>
-  )
+        )
+    }
 }

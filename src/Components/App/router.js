@@ -26,8 +26,14 @@ const routes = {
   '/profile': {
     title: 'Профиль'
   },
-  '/current/:id': {
-    title: 'Статья '
+  '/article': {
+    title: 'Список статей',
+    '/new': {
+      title: 'Новая статья'
+    },
+    '/:id': {
+      title: 'Статья'
+    }
   }
 };
 

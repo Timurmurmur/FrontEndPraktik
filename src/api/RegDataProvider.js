@@ -3,6 +3,7 @@ import { BaseRestDataProvider } from "./BaseRestDataProvider";
 
 export class RegDataProvider extends BaseRestDataProvider {
   reg(login, password, nickname, email) {
+
     return axios
     .post(
       `${this.host}auth/register`,
@@ -16,9 +17,14 @@ export class RegDataProvider extends BaseRestDataProvider {
     )
     .then(res =>
       {
-        localStorage.setItem("X_CSRF_TOKEN", res.headers["x-csrf-token"])
+        localStorage.setItem("token", res.data.token);
         return res
       }
     )
   }
 }
+
+// login: 'Timurmurmur',
+//     password: '952169679asD',
+//     nickname: 'Timurmurmur',
+//     email: 'bartimurmurmur@gmail.com'

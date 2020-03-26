@@ -5,62 +5,78 @@ import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import {useStore} from 'react-redux';
 
 import {SettingMenu} from '../SettingMenu/SettingMenu';
-
+import { Loader } from '../Loader/Loader';
+import { PageStatus } from '../../common/typings';
+import { TextEditor } from '../TextEditor/TextEditor';
+import {Editor, EditorState, RichUtils} from 'draft-js';
+import { stateFromHTML } from 'draft-js-import-html';
 const { TextArea } = Input;
 
-export const Article = () => {
-    const {router} = useStore().getState();
-    const [changeStatus, setChangeStatus] = useState(false);
-    const [textarea, setTextarea] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
-    const [id, setId] = useState(router.params.id);
-    const [admin, setAdmin] = useState(router.query.admin);
+export class Article extends React.Component {
+    constructor(props){
+        super(props);
 
-    console.log(id);
-    const handleTextAreaChange = (e) => {
-        setTextarea(e.target.value);
-    }
-
-    const editButtonHandler = (event) => {
-        if(changeStatus) {
-            setChangeStatus(false);
-        } else {
-            setChangeStatus(true);
+        this.state = {
+            changeStatus: false,
+            userId: localStorage.getItem('userId'),
         }
+        this.onChange = (editorState) => this.setState({editorState});
+        this.editButtonHandler = this.editButtonHandler.bind(this);
+    }
+    componentDidMount() {
+        this.props.loadPost(this.props.router.params.id);
     }
 
-    return (
-        <div className="articleWrapper">
-            <SettingMenu/>
-            <div className="articleMenu">
-                <span className="articleID">{id}</span>
-                {admin ? <div className="articleToolTip">
-                    <Tooltip title="Edit">
-                        <Button className="iconEdit" type='default' shape='circle' icon={< EditOutlined />} onClick={editButtonHandler}/>
-                    </Tooltip>
-                    <Tooltip title="Delete">
-                        <Button type='default' shape='circle' icon={< DeleteOutlined />}/>
-                    </Tooltip>
-                </div>: ''}
-            </div>
-            <div className="article">
-                {changeStatus ? 
-                <>
-                <div className="articleInfo">
-                    <Input className="articleTitle" placeholder="Название статьи" value="Название статьи"/>
-                    <span className="articleDate">Дата создания - 21.03.2001</span>
-                </div>
-                <TextArea className="articleContent" placeholder="Запись..." autoSize value={textarea} onChange={handleTextAreaChange}/>
-                </>
-                : <>
-                    <div className="articleInfo" style={{padding: '4px 11px'}}>
-                        <span>Название статьи</span>
-                        <span className="articleDate">Дата создания - 21.03.2001</span>
+    editButtonHandler = (event) => {
+        const { changeStatus } = this.state;
+        let newStatus;
+        if (changeStatus){
+            newStatus = false;
+        } else {
+            newStatus = true;
+        }
+        this.setState({
+            changeStatus: newStatus,
+            editorState: EditorState.createWithContent(stateFromHTML(this.props.post.post))
+        })
+    }
+
+   render() {
+        if(this.props.pageStatus === PageStatus.LOADING ) {
+            return(<Loader></Loader>)
+        } else {
+            // console.log(`USERID:${this.state.userId}`, `POSTOWNERID:${this.props.post.userId}`)
+            console.log(stateFromHTML(this.props.post.post))
+            return (
+                <div className="articleWrapper">
+                    <SettingMenu/>
+                    <div className="articleMenu">
+                    <span className="articleID">Айди статьи: {this.props.post.id}</span>
+                        {this.state.userId == this.props.post.userId ? 
+                        <div className="articleToolTip">
+                            <Tooltip title="Edit">
+                                <Button className="iconEdit" type='default' shape='circle' icon={<EditOutlined />} onClick={e => this.editButtonHandler(e)}/>
+                            </Tooltip>
+                            <Tooltip title="Delete">
+                                <Button type='default' shape='circle' icon={<DeleteOutlined />}/>
+                            </Tooltip>
+                        </div>: ""}
                     </div>
-                    <div className="articleInfo" style={{marginTop: 20, padding: '4px 11px'}}>
-                        <span >{textarea}</span>
-                    </div></>}
-                
-            </div>
-        </div>
-    );
+                    <div className="article">
+                        {this.state.changeStatus ? 
+                        <TextEditor editorState={this.state.editorState} onChange={this.onChange}/> :
+                        <>
+                        <div className="articleInfo" style={{padding: '4px 11px'}}>
+                            <span style={{fontSize: 25, fontWeight: 'bold'}}>{this.props.post.title}</span>
+                            <span className="articleDate">{this.props.post.createdAt.split('T')[0]}</span>
+                        </div>
+                        <div style={{marginTop: 20, padding: '4px 11px'}} dangerouslySetInnerHTML={{__html: this.props.post.post}}>
+                        </div>
+                        </>
+                        }
+                    </div>
+                </div>
+            )
+        }
+   }
 }
