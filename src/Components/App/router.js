@@ -2,7 +2,8 @@ import {
   LOCATION_CHANGED,
   routerForBrowser,
   GO_BACK,
-  goBack
+  goBack,
+  go,
 } from "redux-little-router";
 import {
   Dispatch,
@@ -12,6 +13,7 @@ import {
   combineReducers
 } from "redux";
 import { Action, State } from "./App";
+import { changeLocation } from '../../common/helpers';
 
 const routes = {
   '/': {
@@ -43,6 +45,10 @@ export const routesMiddleware = (store) => (next) => (action) => {
       const { result } = action.payload;
       if (result && result.title) {
         document.title = result.title;
+      }
+      if (localStorage.getItem('token') === null && action.payload.pathname !== '/reg'){
+        console.log(action.payload)
+        action.payload.pathname = "/auth"
       }
       break;
     }

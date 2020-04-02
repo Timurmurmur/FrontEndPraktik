@@ -1,0 +1,51 @@
+.commentContainer {
+  background-color: #fff;
+  margin-top: 20px;
+  border-radius: 20px;
+  padding: 40px;
+}
+.commentContainer .commentWrapper{
+  display: flex;
+}
+
+.commentHeader{
+  display: flex;
+  align-items: center;
+}
+.commentBody{
+  margin-left: 20px;
+  width: 100%;
+}
+.commentBody .commentName {
+  font-size: 16px;
+  font-weight: bold;
+}
+.commentHeader .commentImage img{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+.commentInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addCommentContainer {
+  margin-top: 20px;
+}
+.addCommentTitle{
+  margin-bottom: 10px;
+}
+.addCommentWrapper{
+  display: flex;
+  justify-content: space-between;
+}
+.addCommentWrapper .addCommentInput{
+  width: 80%;
+}
+.addCommentWrapper .addCommentButton{
+  width: 15%;
+}
+.addCommentButton button{
+  width: 100%;
+}

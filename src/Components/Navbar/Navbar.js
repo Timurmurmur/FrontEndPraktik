@@ -6,6 +6,9 @@ import { Link } from 'redux-little-router';
 const img = require('../../assets/Frame.png');
 
 export const Navbar = () => {
+    const logout = (event) => {
+        localStorage.clear();
+    }
     return (
         <div className="navBarWrapper">
             <span className="logo">
@@ -20,7 +23,7 @@ export const Navbar = () => {
                         <UserOutlined />
                     </Link>
                 </div>
-                <Link href={{ pathname: '/auth' }}>
+                <Link href={{ pathname: '/auth' }} onClick={logout}>
                     <LogoutOutlined />
                 </Link>
             </div>

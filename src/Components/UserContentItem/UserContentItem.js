@@ -14,12 +14,15 @@ export const UserContentItem = ({items, admin}) => {
 
     return ( 
     <table className="userContentItemWrapper" cellPadding={15} cellSpacing={10}> 
-        <tr className="userContentInfo">
-            <td className="userContentInfoItems">Название статьи</td>
-            <td className="userContentInfoItems">Категория</td>
-            <td className="userContentInfoItems">Дата публикации</td>
-            <td className="userContentInfoItems">Количество просмотров</td>
-        </tr>
+        <thead>
+            <tr className="userContentInfo">
+                <td className="userContentInfoItems">Название статьи</td>
+                <td className="userContentInfoItems">Категория</td>
+                <td className="userContentInfoItems">Дата публикации</td>
+                <td className="userContentInfoItems">Количество просмотров</td>
+            </tr>
+        </thead>
+        <tbody>
         {
             items.map((item, index) => (
                     <tr className="userContentItem" onClick={(e) => goToCurrentArticle(item.id, item)} key={index}>
@@ -37,6 +40,7 @@ export const UserContentItem = ({items, admin}) => {
                     </tr>
             ))
         } 
+        </tbody>
     </table>
     );
 }

@@ -14,4 +14,16 @@ export class ArticleDataProvider extends BaseRestDataProvider {
     .post(`${this.host}post`, article, { headers: { token: localStorage.getItem('token') }})
     .then(res => res.data)
   }
+
+  async changeArticle(article, id) {
+    return await axios
+    .put(`${this.host}post/${id}`, article, { headers: { token: localStorage.getItem('token') }})
+    .then(res => res.data);
+  }
+
+  async deleteArticle(id){
+    return await axios
+    .delete(`${this.host}post/${id}`,{ headers: { token: localStorage.getItem('token') }})
+    .then(res => res.data)
+  }
 }

@@ -3,7 +3,7 @@ import { from, of } from "rxjs";
 import { catchError, switchMap } from "rxjs/operators";
 import { LOAD_USER_POSTS, loadUserPostsSuccess, loadUserPostsError } from "./actions";
 
-const profileEpic = (action$, store$, deps) => {
+const profilePostsEpic = (action$, store$, deps) => {
   return action$.pipe(
     ofType(LOAD_USER_POSTS),
     switchMap(({}) => {
@@ -19,4 +19,6 @@ const profileEpic = (action$, store$, deps) => {
   );
 };
 
-export const profileEpics = combineEpics(profileEpic);
+
+
+export const profileEpics = combineEpics(profilePostsEpic);

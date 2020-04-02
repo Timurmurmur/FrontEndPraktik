@@ -1,7 +1,7 @@
 import React from 'react';
 import './UserContent.css';
 
-import {SettingMenu} from '../SettingMenu/SettingMenu';
+import {SettingMenuContainer} from '../SettingMenu/SettingMenuContainer';
 import {UserContentItem} from '../UserContentItem/UserContentItem';
 import { Button } from 'antd';
 import { Link } from 'redux-little-router';
@@ -9,9 +9,14 @@ import { Link } from 'redux-little-router';
 export const UserContent = ({ items, admin }) => {
     return (
         <div className="userContentWrapper">
-            <SettingMenu/>
+            <SettingMenuContainer/>
             <div className="articleMenu">
                 <span className="articleID">Ваши статьи</span>
+                <Link href={{pathname: '/article/new'}}>
+                    <Button type="default">
+                    Новая статья
+                    </Button>
+                </Link>
             </div>
             <div className="article">
                 <div className="userContent">

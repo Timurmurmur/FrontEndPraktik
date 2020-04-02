@@ -5,16 +5,20 @@ import createVideoPlugin from 'draft-js-video-plugin';
 import { stateToHTML } from 'draft-js-export-html';
 import './TextEditor.css'
 import { Button, Input } from 'antd';
+import 'draft-js-video-plugin/lib/plugin.css'
+import 'draft-js-alignment-plugin/lib/plugin.css';
 
 import createAlignmentPlugin from 'draft-js-alignment-plugin';
-
+import createImagePlugin from 'draft-js-image-plugin';
 import createFocusPlugin from 'draft-js-focus-plugin';
 
 import createResizeablePlugin from 'draft-js-resizeable-plugin';
+import addImage from 'draft-js-image-plugin/lib/modifiers/addImage';
 
 const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
 const alignmentPlugin = createAlignmentPlugin();
+const imagePlugin = createImagePlugin();
 const { AlignmentTool } = alignmentPlugin;
 
 
@@ -26,7 +30,7 @@ const decorator = composeDecorators(
 
 const videoPlugin = createVideoPlugin({decorator});
 const { types } = videoPlugin;
-const plugins = [focusPlugin, alignmentPlugin, resizeablePlugin, videoPlugin];
+const plugins = [focusPlugin, alignmentPlugin, resizeablePlugin, videoPlugin, imagePlugin];
 
 export class TextEditor extends React.Component {
   constructor(props){
@@ -38,7 +42,8 @@ export class TextEditor extends React.Component {
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
 
     this.state = {
-      source: ''
+      imageSource: '',
+      videoSource: '',
     }
   }
   _handleKeyCommand(command) {
@@ -78,12 +83,12 @@ export class TextEditor extends React.Component {
     e.preventDefault();
     const { editorState } = this.props;
     
-    if (RichUtils.getCurrentBlockType(editorState) === ATOMIC) {
+    if (RichUtils.getCurrentBlockType(editorState) === types.ATOMIC) {
       return editorState;
     }
     const contentState = editorState.getCurrentContent();
     const contentStateWithEntity = contentState.createEntity(
-      VIDEOTYPE,
+      types.VIDEOTYPE,
       'IMMUTABLE',
       { src: this.state.source }
     );
@@ -93,8 +98,16 @@ export class TextEditor extends React.Component {
 
   videoUrlChangeHandler (e) {
     this.setState({
-      source: e.target.value
+      videoSource: e.target.value
     })
+  }
+  imageUrlChangeHandler (e) {
+    this.setState({
+      imageSource: e.target.value
+    })
+  }
+  _addImageFromUrl = (e) => {
+    this.props.onChange(addImage(this.props.editorState, this.state.imageSource));
   }
   render() {
     const {editorState} = this.props;
@@ -123,6 +136,10 @@ export class TextEditor extends React.Component {
                 <Button type="primary" onClick={e => this._addVideoFromUrl(e)}>Добавить видео</Button>
                 <Input placeholder="Вставьте url для видео" style={{width: 300, marginLeft: 20}} value={this.state.source} onChange={e => this.videoUrlChangeHandler(e)}/>
               </div>
+              <div style={{marginTop: 20}}>
+                <Button type="primary" onClick={e => this._addImageFromUrl(e)}>Добавить картинку</Button>
+                <Input placeholder="Вставьте url для картинки" style={{width: 300, marginLeft: 20}} value={this.state.source} onChange={e => this.videoUrlChangeHandler(e)}/>
+              </div>
               <div className={className} onClick={this.focus}>
                 <Editor
                   blockStyleFn={getBlockStyle}
@@ -137,9 +154,7 @@ export class TextEditor extends React.Component {
                   plugins={plugins}
                 />
               </div>
-              <div style={{display: 'flex'}}>
-                <AlignmentTool />
-              </div>
+              <AlignmentTool />
             </div>
     )
   }

@@ -1,5 +1,5 @@
 import { PageStatus } from "../../common/typings";
-import { LOAD_USER_POSTS, LOAD_USER_POSTS_ERROR, LOAD_USER_POSTS_SUCCESS } from './actions';
+import { LOAD_USER_POSTS, LOAD_USER_POSTS_ERROR, LOAD_USER_POSTS_SUCCESS, LOAD_USER, LOAD_USER_SUCCESS, LOAD_USER_ERROR } from './actions';
 
 const defaultAuthState = { pageStatus: PageStatus.LOADING };
 
@@ -22,6 +22,7 @@ export const profile = (state = defaultAuthState, action) => {
         pageStatus: PageStatus.LOADED,
         posts: action.posts
       };
+    
     default:
       return state;
   }

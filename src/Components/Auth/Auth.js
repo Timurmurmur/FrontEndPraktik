@@ -13,7 +13,6 @@ export const Auth = (props) => {
 
   const [password, setPassword] = useState("");
   const [passwordValidate, setPasswordValidate] = useState(false);
-
   const handleLoginChangeCallback = useCallback(
     (e) => {
       if (e.target) {

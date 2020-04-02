@@ -5,7 +5,8 @@ import { Profile } from "./Profile";
 const mapStateToProps = (state) => ({
   pageStatus: state.profile.pageStatus,
   error: state.profile.error,
-  posts: state.profile.posts
+  posts: state.profile.posts,
+  user: state.profile.user
 });
 
 const mapDispatchToProps = (dispatch) => ({

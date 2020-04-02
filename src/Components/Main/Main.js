@@ -13,12 +13,24 @@ export class Main extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {}
+        this.state = {
+            title: ''
+        }
     }
 
     componentDidMount() {
         this.props.loadPosts();
         console.log(this.props);
+    }
+
+    searchChangeHandler = (e) => {
+        this.setState({
+            title: e.target.value
+        })
+    }
+
+    searchSubmitHandler = (e) => {
+        this.props.loadPostsByTitle(this.state.title);
     }
 
     render() {
@@ -28,7 +40,7 @@ export class Main extends React.Component {
                 <div className="userContentWrapper">
                 <div className="articleMenu" style={{alignItems: 'center'}}>
                     <div>
-                    <Search />
+                    <Search onChange={this.searchChangeHandler} submitHandler={this.searchSubmitHandler}/>
                     </div>
                     <span className="articleID">Список статей</span>
                 </div>

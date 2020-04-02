@@ -52,6 +52,13 @@ import { NewArticle } from '../NewArticle/NewArticle';
 import { newArticle } from '../NewArticle/reducer';
 import { newArticleEpics } from '../NewArticle/epics';
 import { NewArticleContainer } from '../NewArticle/NewArticleContainer';
+import { changeLocation } from '../../common/helpers';
+import { userEpics } from '../SettingMenu/epics';
+import { user } from '../SettingMenu/reducer';
+import { UserDataProvider } from '../../api/UserDataProvider';
+import { comment } from '../Comment/reducer';
+import { commentEpics } from '../Comment/epics';
+import { CommentDataProvider } from '../../api/CommentDataProvider';
 
 const createMiddleware = (
   epicMiddleware
@@ -66,22 +73,24 @@ export const App = (props) => {
       regDataProvider: new RegDataProvider(host),
       mainDataProvider: new MainDataProvider(host),
       articleDataProvider: new ArticleDataProvider(host),
-      profileDataProvider: new ProfileDataProvider(host)
+      profileDataProvider: new ProfileDataProvider(host),
+      userDataProvider: new UserDataProvider(host),
+      commentsDataProvider: new CommentDataProvider(host),
     }
   });
 
   const store = createStore(
-    combineReducers({ router, auth, reg, main, article, profile, newArticle }),
+    combineReducers({ router, auth, reg, main, article, profile, newArticle, user, comment }),
     composeEnhancers(enhancer, createMiddleware(epicMiddleware))
   );
-  epicMiddleware.run(combineEpics( authEpics, regEpics, mainEpics, articleEpics, profileEpics, newArticleEpics));
+  epicMiddleware.run(combineEpics( authEpics, regEpics, mainEpics, articleEpics, profileEpics, newArticleEpics, userEpics, commentEpics));
 
   const initialState = store.getState();
 
   if (initialState && initialState.router) {
     store.dispatch(initializeCurrentLocation(initialState.router));
   }
-
+  
 
   return (
     <Provider store={store}>

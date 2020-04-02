@@ -1,9 +1,9 @@
 import { combineEpics, ofType } from "redux-observable";
 import { from, of } from "rxjs";
 import { catchError, switchMap } from "rxjs/operators";
-import { LOAD_POSTS, loadPostsSuccess, loadPostsError } from "./actions";
+import { LOAD_POSTS, loadPostsSuccess, loadPostsError, LOAD_POSTS_BY_TITLE, loadPostsByTitleSuccess, loadPostsByTitleError } from "./actions";
 
-const mainEpic = (action$, store$, deps) => {
+const loadPostsEpic = (action$, store$, deps) => {
   return action$.pipe(
     ofType(LOAD_POSTS),
     switchMap(({}) => {
@@ -15,8 +15,23 @@ const mainEpic = (action$, store$, deps) => {
           return of(loadPostsError(e));
         })
       );
-    })
+    }),
   );
 };
 
-export const mainEpics = combineEpics(mainEpic);
+const loadPostsByTitleEpic = (action$, store$, deps) => {
+  return action$.pipe(
+    ofType(LOAD_POSTS_BY_TITLE),
+    switchMap(({ title }) => {
+      return from(deps.mainDataProvider.loadPostsByTitle(title)).pipe(
+        switchMap((data) => {
+          return of(loadPostsByTitleSuccess(data));
+        }),
+        catchError(e => {
+          return of(loadPostsByTitleError(e));
+        })
+      );
+    }),
+  );
+};
+export const mainEpics = combineEpics(loadPostsEpic,loadPostsByTitleEpic);
