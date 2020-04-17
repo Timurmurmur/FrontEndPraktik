@@ -1,1 +1,1 @@
-export const host = "http://localhost/api/";
+export const host = "http://www.crimea-concert.ru/api/";
