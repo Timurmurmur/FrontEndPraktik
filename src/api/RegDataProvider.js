@@ -18,6 +18,7 @@ export class RegDataProvider extends BaseRestDataProvider {
     .then(res =>
       {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.id);
         return res
       }
     )
